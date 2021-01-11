@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,11 +22,13 @@ public class MainActivity extends AppCompatActivity {
     public RecyclerView recyclerView;
     public Adapter adapter;
     public LinearLayoutManager layoutManager;
+    public LinearLayout linearLayoutEmpty;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         recyclerView = findViewById(R.id.recyclerView);
+        linearLayoutEmpty = findViewById(R.id.layoutReminder);
 
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {

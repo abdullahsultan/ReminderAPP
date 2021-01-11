@@ -4,14 +4,28 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/reminder_name"
-        android:layout_width="wrap_content"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30px"
-        android:layout_marginLeft="20px"
-        android:text="Reminder Name"
-        android:textSize="40dp"/>
+        android:orientation="horizontal"
+        android:layout_margin="20px">
+        <TextView
+            android:id="@+id/reminder_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Reminder Name"
+            android:textSize="40dp"/>
+
+        <ImageButton
+            android:id="@+id/button_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/delete"
+            android:layout_gravity="center_vertical|end"
+            />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <TextView
         android:id="@+id/reminder_time"
@@ -30,6 +44,8 @@
         android:layout_marginLeft="20px"
         android:textSize="25dp"
         android:text="00/00/0000"/>
+
+
 
 
 </LinearLayout>
