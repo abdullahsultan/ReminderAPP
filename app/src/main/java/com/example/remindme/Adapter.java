@@ -1,21 +1,27 @@
 package com.example.remindme;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
-    Context context;
+    public Context context;
+    public int number;
     ArrayList<ReminderItems> data;
     public Adapter(Context context, ArrayList<ReminderItems> data)
     {
@@ -35,6 +41,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        number = position;
         ReminderItems reminderItems = this.data.get(position);
         holder.title.setText(reminderItems.title);
         String temp = Integer.toString(reminderItems.time_hours)+":" + Integer.toString(reminderItems.time_minutes)+":"+ reminderItems.time_AM_PM;
@@ -42,6 +49,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         temp = Integer.toString(reminderItems.date_day)+"/"+Integer.toString(reminderItems.date_month)+"/"+Integer.toString(reminderItems.date_year);
         holder.date.setText(temp);
 
+        Calendar myAlarmDate = Calendar.getInstance();
+        myAlarmDate.setTimeInMillis(System.currentTimeMillis());
+        myAlarmDate.set(reminderItems.date_year, reminderItems.date_month, reminderItems.date_day, reminderItems.time_hours, reminderItems.time_minutes, 0);
+        startAlarm(myAlarmDate);
 
         holder.button_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +60,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 data.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, data.size());
+                cancelAlarm();
             }
         });
     }
@@ -71,5 +83,25 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             date= itemView.findViewById(R.id.reminder_date);
             button_delete = itemView.findViewById(R.id.button_delete);
         }
+    }
+
+    public void startAlarm(Calendar c)
+    {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, number, intent, 0);
+     //   if (c.before(Calendar.getInstance())) {
+       //     c.add(Calendar.DATE, 1);
+        //}
+        alarmManager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+        Log.i("LALAHU",Long.toString(c.getTimeInMillis()));
+    }
+
+    public void cancelAlarm()
+    {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, number, intent, 0);
+        alarmManager.cancel(pendingIntent);
     }
 }
