@@ -15,6 +15,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     Context context;
     ArrayList<ReminderItems> data;
+    public Adapter(Context context, ArrayList<ReminderItems> data)
+    {
+        this.context = context;
+        this.data = data;
+    }
+
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

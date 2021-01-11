@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -13,7 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-public class MainActivity2 extends AppCompatActivity {
+import java.io.Serializable;
+
+public class MainActivity2 extends AppCompatActivity  {
 
     LinearLayout mainLinearLayout;
     EditText editText_title;
@@ -75,6 +78,17 @@ public class MainActivity2 extends AppCompatActivity {
         imageButton_Cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
+            }
+        });
+
+        imageButton_OK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReminderItems reminderItems = get_return_data();
+                Intent output = new Intent();
+                output.putExtra("TheData", reminderItems);
+                setResult(RESULT_OK, output);
                 finish();
             }
         });
@@ -146,6 +160,26 @@ public class MainActivity2 extends AppCompatActivity {
     public void set_date(){
         String date = datePicker.getDayOfMonth() + "/" + datePicker.getMonth()+1 + "/" +datePicker.getYear();
         textView_date.setText(date);
+    }
+
+    public ReminderItems get_return_data()
+    {
+        ReminderItems reminderItems = new ReminderItems();
+        reminderItems.title = editText_title.getText().toString();
+
+        reminderItems.time_minutes = timePicker.getMinute();
+        reminderItems.time_hours = timePicker.getHour();
+        if(timePicker.getHour() < 12) {
+            reminderItems.time_AM_PM = "AM";
+        } else {
+            reminderItems.time_AM_PM = "PM";
+        }
+
+        reminderItems.date_day = datePicker.getDayOfMonth();
+        reminderItems.date_month = datePicker.getMonth()+1;
+        reminderItems.date_year = datePicker.getYear();
+
+        return  reminderItems;
     }
 
 }
