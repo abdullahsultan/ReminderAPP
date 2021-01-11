@@ -49,6 +49,7 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 hide_time();
                 show_Backgroud();
+                set_time();
             }
         });
 
@@ -66,6 +67,7 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 hide_date();
                 show_Backgroud();
+                set_date();
             }
         });
 
@@ -87,7 +89,7 @@ public class MainActivity2 extends AppCompatActivity {
         textView_date = findViewById(R.id.TextView_Date);
         button_date = findViewById(R.id.Button_Date);
         linearLayout_Time = findViewById(R.id.LinearLayout_Time);
-        timePicker = findViewById(R.id.TimePicker);
+        timePicker = findViewById(R.id.TimePicker);      timePicker.setIs24HourView(false);
         button_timePicker = findViewById(R.id.Button_TimeOK);
         linearLayout_Date = findViewById(R.id.LinearLayout_Date);
         datePicker = findViewById(R.id.DatePicker);
@@ -127,6 +129,23 @@ public class MainActivity2 extends AppCompatActivity {
     public void show_date()
     {
         linearLayout_Date.setVisibility(View.VISIBLE);
+    }
+
+    public void set_time()
+    {
+        String AM_PM;
+        if(timePicker.getHour() < 12) {
+            AM_PM = "AM";
+        } else {
+            AM_PM = "PM";
+        }
+        String time = Integer.toString(timePicker.getHour()) + ":" + Integer.toString(timePicker.getMinute()) + "  " + AM_PM;
+        textView_time.setText(time);
+    }
+
+    public void set_date(){
+        String date = datePicker.getDayOfMonth() + "/" + datePicker.getMonth()+1 + "/" +datePicker.getYear();
+        textView_date.setText(date);
     }
 
 }
