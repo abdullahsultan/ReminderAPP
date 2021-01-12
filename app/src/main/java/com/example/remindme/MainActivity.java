@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -28,11 +30,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        linearLayoutEmpty = findViewById(R.id.layoutReminder);
-
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
+
+                if(reminderItemsArrayList.isEmpty())
+                    linearLayoutEmpty.setVisibility(View.VISIBLE);
+                else
+                    linearLayoutEmpty.setVisibility(View.GONE);
 
                 // Get String data from Intent
                 ReminderItems reminderItems;
@@ -46,14 +50,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ////////////////////////////////////Getting IDS///////////////////////////////////
+        recyclerView = findViewById(R.id.recyclerView);
+        linearLayoutEmpty = findViewById(R.id.layoutReminder);
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
-
-
+        registerReceiver(new AlertReceiver(),new IntentFilter());
 
 
 
@@ -66,4 +72,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 }

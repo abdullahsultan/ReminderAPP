@@ -103,7 +103,7 @@ public class MainActivity2 extends AppCompatActivity  {
         textView_date = findViewById(R.id.TextView_Date);
         button_date = findViewById(R.id.Button_Date);
         linearLayout_Time = findViewById(R.id.LinearLayout_Time);
-        timePicker = findViewById(R.id.TimePicker);      timePicker.setIs24HourView(false);
+        timePicker = findViewById(R.id.TimePicker);      //timePicker.setIs24HourView(false);
         button_timePicker = findViewById(R.id.Button_TimeOK);
         linearLayout_Date = findViewById(R.id.LinearLayout_Date);
         datePicker = findViewById(R.id.DatePicker);

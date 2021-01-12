@@ -49,9 +49,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         temp = Integer.toString(reminderItems.date_day)+"/"+Integer.toString(reminderItems.date_month)+"/"+Integer.toString(reminderItems.date_year);
         holder.date.setText(temp);
 
+
         Calendar myAlarmDate = Calendar.getInstance();
         myAlarmDate.setTimeInMillis(System.currentTimeMillis());
-        myAlarmDate.set(reminderItems.date_year, reminderItems.date_month, reminderItems.date_day, reminderItems.time_hours, reminderItems.time_minutes, 0);
+        myAlarmDate.set(reminderItems.date_year, reminderItems.date_month - 1, reminderItems.date_month, reminderItems.time_hours, reminderItems.time_minutes, 0);
+        Log.i("DATETESTING",Integer.toString(reminderItems.date_year)+ "/" + Integer.toString(reminderItems.date_month)+"/" +Integer.toString(reminderItems.date_day));
         startAlarm(myAlarmDate);
 
         holder.button_delete.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +95,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
      //   if (c.before(Calendar.getInstance())) {
        //     c.add(Calendar.DATE, 1);
         //}
-        alarmManager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
         Log.i("LALAHU",Long.toString(c.getTimeInMillis()));
     }
 
