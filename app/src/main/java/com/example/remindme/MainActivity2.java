@@ -38,6 +38,7 @@ public class MainActivity2 extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         GetIds();
+        timePicker.setIs24HourView(false);
 
         button_Time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +104,7 @@ public class MainActivity2 extends AppCompatActivity  {
         textView_date = findViewById(R.id.TextView_Date);
         button_date = findViewById(R.id.Button_Date);
         linearLayout_Time = findViewById(R.id.LinearLayout_Time);
-        timePicker = findViewById(R.id.TimePicker);      //timePicker.setIs24HourView(false);
+        timePicker = findViewById(R.id.TimePicker);
         button_timePicker = findViewById(R.id.Button_TimeOK);
         linearLayout_Date = findViewById(R.id.LinearLayout_Date);
         datePicker = findViewById(R.id.DatePicker);
@@ -176,7 +177,7 @@ public class MainActivity2 extends AppCompatActivity  {
         }
 
         reminderItems.date_day = datePicker.getDayOfMonth();
-        reminderItems.date_month = datePicker.getMonth()+1;
+        reminderItems.date_month = datePicker.getMonth();
         reminderItems.date_year = datePicker.getYear();
 
         return  reminderItems;

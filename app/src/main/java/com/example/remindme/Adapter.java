@@ -44,16 +44,20 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         number = position;
         ReminderItems reminderItems = this.data.get(position);
         holder.title.setText(reminderItems.title);
+
+        ///////////////////////////////////////////////////////// Setting Date & Time to UI /////////////////////////////////////////
         String temp = Integer.toString(reminderItems.time_hours)+":" + Integer.toString(reminderItems.time_minutes)+":"+ reminderItems.time_AM_PM;
         holder.time.setText(temp);
-        temp = Integer.toString(reminderItems.date_day)+"/"+Integer.toString(reminderItems.date_month)+"/"+Integer.toString(reminderItems.date_year);
+        temp = Integer.toString(reminderItems.date_day)+"/"+Integer.toString(reminderItems.date_month+1)+"/"+Integer.toString(reminderItems.date_year);
         holder.date.setText(temp);
 
 
         Calendar myAlarmDate = Calendar.getInstance();
         myAlarmDate.setTimeInMillis(System.currentTimeMillis());
-        myAlarmDate.set(reminderItems.date_year, reminderItems.date_month - 1, reminderItems.date_month, reminderItems.time_hours, reminderItems.time_minutes, 0);
-        Log.i("DATETESTING",Integer.toString(reminderItems.date_year)+ "/" + Integer.toString(reminderItems.date_month)+"/" +Integer.toString(reminderItems.date_day));
+        myAlarmDate.set(reminderItems.date_year, reminderItems.date_month, reminderItems.date_day, reminderItems.time_hours, reminderItems.time_minutes, 0);
+        Log.i("DATETESTING",Integer.toString(reminderItems.date_year)+ "/" + Integer.toString(reminderItems.date_month)+"/" +Integer.toString(reminderItems.date_day)
+        + "|||||" + Integer.toString(reminderItems.time_hours) + ":" + Integer.toString(reminderItems.time_minutes)
+        );
         startAlarm(myAlarmDate);
 
         holder.button_delete.setOnClickListener(new View.OnClickListener() {
@@ -89,12 +93,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     public void startAlarm(Calendar c)
     {
+
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlertReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, number, intent, 0);
-     //   if (c.before(Calendar.getInstance())) {
-       //     c.add(Calendar.DATE, 1);
-        //}
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, number, intent, PendingIntent.FLAG_ONE_SHOT);
+        if (c.before(Calendar.getInstance())) {
+            c.add(Calendar.DATE, 1);
+        }
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
         Log.i("LALAHU",Long.toString(c.getTimeInMillis()));
     }

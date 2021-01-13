@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RemindMe</string>
+    <string name="intent_action">set_reminder</string>
 </resources>
