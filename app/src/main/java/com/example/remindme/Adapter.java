@@ -22,6 +22,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     public Context context;
     public int number;
+    public String time;
+    public  String date;
+    public String mainTitle;
     ArrayList<ReminderItems> data;
     public Adapter(Context context, ArrayList<ReminderItems> data)
     {
@@ -44,12 +47,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         number = position;
         ReminderItems reminderItems = this.data.get(position);
         holder.title.setText(reminderItems.title);
+        mainTitle = reminderItems.title;
 
         ///////////////////////////////////////////////////////// Setting Date & Time to UI /////////////////////////////////////////
-        String temp = Integer.toString(reminderItems.time_hours)+":" + Integer.toString(reminderItems.time_minutes)+":"+ reminderItems.time_AM_PM;
-        holder.time.setText(temp);
-        temp = Integer.toString(reminderItems.date_day)+"/"+Integer.toString(reminderItems.date_month+1)+"/"+Integer.toString(reminderItems.date_year);
-        holder.date.setText(temp);
+        time = Integer.toString(reminderItems.time_hours)+":" + Integer.toString(reminderItems.time_minutes)+":"+ reminderItems.time_AM_PM;
+        holder.time.setText(time);
+        date = Integer.toString(reminderItems.date_day)+"/"+Integer.toString(reminderItems.date_month+1)+"/"+Integer.toString(reminderItems.date_year);
+        holder.date.setText(date);
 
 
         Calendar myAlarmDate = Calendar.getInstance();
@@ -60,6 +64,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         );
         startAlarm(myAlarmDate);
 
+        //////////////////////////////////////////////Delete Reminder/////////////////////////////////////////
         holder.button_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +72,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, data.size());
                 cancelAlarm();
+            }
+        });
+
+        holder.button_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    edit();
             }
         });
     }
@@ -82,12 +94,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         TextView time;
         TextView date;
         ImageButton button_delete;
+        ImageButton button_edit;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.reminder_name);
             time = itemView.findViewById(R.id.reminder_time);
             date= itemView.findViewById(R.id.reminder_date);
             button_delete = itemView.findViewById(R.id.button_delete);
+            button_edit = itemView.findViewById(R.id.ImageButton_Edit);
         }
     }
 
@@ -110,5 +124,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         Intent intent = new Intent(context, AlertReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, number, intent, 0);
         alarmManager.cancel(pendingIntent);
+    }
+
+    public void edit(){
+        Intent intent = new Intent(context,MainActivity2.class);
+        intent.putExtra("title",mainTitle);
+        intent.putExtra("at",number);
+        intent.putExtra("IsEdit",true);
+        intent.putExtra("time",time);
+        intent.putExtra("date",date);
+        context.startActivity(intent);
     }
 }

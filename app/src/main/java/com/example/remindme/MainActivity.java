@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
@@ -28,9 +30,16 @@ public class MainActivity extends AppCompatActivity {
                 // Get String data from Intent
                 ReminderItems reminderItems;
                 reminderItems =  data.getParcelableExtra("TheData");
-                reminderItemsArrayList.add(reminderItems);
+                boolean isEdit = data.getBooleanExtra("IsEdit",false);
 
-
+                if(isEdit)
+                {
+                    Toast.makeText(this, "EDIAAAAAAAAAAAAAAAAAA", Toast.LENGTH_SHORT).show();
+                        int at = data.getIntExtra("at",reminderItemsArrayList.size());
+                        reminderItemsArrayList.set(at,reminderItems);
+                }
+                else
+                {reminderItemsArrayList.add(reminderItems);}
                 adapter.notifyDataSetChanged();
             }
         }

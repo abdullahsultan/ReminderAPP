@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -13,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.io.Serializable;
 
@@ -33,11 +35,29 @@ public class MainActivity2 extends AppCompatActivity  {
     ImageButton imageButton_Cancel;
     ImageButton imageButton_OK;
 
+    public boolean isEdit=false;
+    public int at=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         GetIds();
+
+
+        Intent intent = getIntent();
+        isEdit = intent.getBooleanExtra("IsEdit",false);
+        if(isEdit)
+        {
+            Toast.makeText(this, "EDITTTTTTTTTTTTTTTTTTTTTTTTTTTTT", Toast.LENGTH_SHORT).show();
+            textView_time.setText(intent.getStringExtra("time"));
+            textView_date.setText( intent.getStringExtra("date"));
+            editText_title.setText(intent.getStringExtra("title"));
+            at = intent.getIntExtra("at",0);
+
+        }
+
+
         timePicker.setIs24HourView(false);
 
         button_Time.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +109,8 @@ public class MainActivity2 extends AppCompatActivity  {
                 ReminderItems reminderItems = get_return_data();
                 Intent output = new Intent();
                 output.putExtra("TheData", reminderItems);
+                output.putExtra("IsEdit",isEdit);
+                output.putExtra("at",at);
                 setResult(RESULT_OK, output);
                 finish();
             }

@@ -1,5 +1,7 @@
 package com.example.remindme;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -14,16 +16,15 @@ public class AlertReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
 
-            Toast.makeText(context, intent.getAction(), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Called", Toast.LENGTH_LONG).show();
 
             MediaPlayer mediaPlayer = MediaPlayer.create(context, Settings.System.DEFAULT_NOTIFICATION_URI);
             mediaPlayer.start();
 
 
-
-       /* NotificationHelper notificationHelper = new NotificationHelper(context);
+        NotificationHelper notificationHelper = new NotificationHelper(context);
         NotificationCompat.Builder nb = notificationHelper.getChannelNotification();
-        notificationHelper.getManager().notify(1, nb.build());*/
+        notificationHelper.getManager().notify(1, nb.build());
     }
 
 }
