@@ -57,13 +57,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.date.setText(date);
 
 
-        Calendar myAlarmDate = Calendar.getInstance();
+    /*    Calendar myAlarmDate = Calendar.getInstance();
         myAlarmDate.setTimeInMillis(System.currentTimeMillis());
         myAlarmDate.set(reminderItems.date_year, reminderItems.date_month, reminderItems.date_day, reminderItems.time_hours, reminderItems.time_minutes, 0);
         Log.i("DATETESTING",Integer.toString(reminderItems.date_year)+ "/" + Integer.toString(reminderItems.date_month)+"/" +Integer.toString(reminderItems.date_day)
         + "|||||" + Integer.toString(reminderItems.time_hours) + ":" + Integer.toString(reminderItems.time_minutes)
         );
-        startAlarm(myAlarmDate);
+        setAlarm(myAlarmDate);*/
 
         //////////////////////////////////////////////Delete Reminder/////////////////////////////////////////
         holder.button_delete.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +72,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 data.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, data.size());
-                cancelAlarm();
+              //  cancelAlarm();
             }
         });
 
@@ -106,7 +106,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         }
     }
 
-    public void startAlarm(Calendar c)
+ /*   public void setAlarm(Calendar c)
     {
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -125,7 +125,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         Intent intent = new Intent(context, AlertReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, number, intent, 0);
         alarmManager.cancel(pendingIntent);
-    }
+    }*/
 
     public void edit(){
         Intent intent = new Intent(context,MainActivity2.class);

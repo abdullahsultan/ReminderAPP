@@ -4,14 +4,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     public Adapter adapter;
     public LinearLayoutManager layoutManager;
     public LinearLayout linearLayoutEmpty;
+
+    int number = 0;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -39,7 +47,17 @@ public class MainActivity extends AppCompatActivity {
                         reminderItemsArrayList.set(at,reminderItems);
                 }
                 else
-                {reminderItemsArrayList.add(reminderItems);}
+                {
+                    reminderItemsArrayList.add(reminderItems);
+                    Calendar myAlarmDate = Calendar.getInstance();
+                    myAlarmDate.setTimeInMillis(System.currentTimeMillis());
+                    myAlarmDate.set(reminderItems.date_year, reminderItems.date_month, reminderItems.date_day, reminderItems.time_hours, reminderItems.time_minutes, 0);
+                    setAlarm(myAlarmDate);
+                    Log.i("DATETESTING",Integer.toString(reminderItems.date_year)+ "/" + Integer.toString(reminderItems.date_month)+"/" +Integer.toString(reminderItems.date_day)
+                            + "|||||" + Integer.toString(reminderItems.time_hours) + ":" + Integer.toString(reminderItems.time_minutes)
+                    );
+                    number++;
+                }
                 adapter.notifyDataSetChanged();
             }
         }
@@ -71,6 +89,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    public void setAlarm(Calendar c)
+    {
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, number, intent, PendingIntent.FLAG_ONE_SHOT);
+        if (c.before(Calendar.getInstance())) {
+            c.add(Calendar.DATE, 1);
+        }
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+        Log.i("LALAHU",Long.toString(c.getTimeInMillis()));
+    }
+
+    public void cancelAlarm()
+    {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, number, intent, 0);
+        alarmManager.cancel(pendingIntent);
     }
 
 
