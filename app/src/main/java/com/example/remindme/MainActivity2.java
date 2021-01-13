@@ -49,7 +49,6 @@ public class MainActivity2 extends AppCompatActivity  {
         isEdit = intent.getBooleanExtra("IsEdit",false);
         if(isEdit)
         {
-            Toast.makeText(this, "EDITTTTTTTTTTTTTTTTTTTTTTTTTTTTT", Toast.LENGTH_SHORT).show();
             textView_time.setText(intent.getStringExtra("time"));
             textView_date.setText( intent.getStringExtra("date"));
             editText_title.setText(intent.getStringExtra("title"));

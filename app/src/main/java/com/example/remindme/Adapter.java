@@ -22,7 +22,7 @@ import java.util.Calendar;
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     public Context context;
-    public int number;
+    public static int number;
     public String time;
     public  String date;
     public String mainTitle;
@@ -72,7 +72,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 data.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, data.size());
-              //  cancelAlarm();
+                cancelAlarm();
             }
         });
 
@@ -117,7 +117,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         }
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
         Log.i("LALAHU",Long.toString(c.getTimeInMillis()));
-    }
+    }*/
 
     public void cancelAlarm()
     {
@@ -125,7 +125,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         Intent intent = new Intent(context, AlertReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, number, intent, 0);
         alarmManager.cancel(pendingIntent);
-    }*/
+    }
 
     public void edit(){
         Intent intent = new Intent(context,MainActivity2.class);

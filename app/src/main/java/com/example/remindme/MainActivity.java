@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     public LinearLayoutManager layoutManager;
     public LinearLayout linearLayoutEmpty;
 
-    int number = 0;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -42,12 +41,14 @@ public class MainActivity extends AppCompatActivity {
 
                 if(isEdit)
                 {
-                    Toast.makeText(this, "EDIAAAAAAAAAAAAAAAAAA", Toast.LENGTH_SHORT).show();
+                    cancelPreviousReminder();
                         int at = data.getIntExtra("at",reminderItemsArrayList.size());
                         reminderItemsArrayList.set(at,reminderItems);
                 }
                 else
                 {
+
+                    Toast.makeText(this, Integer.toString(Adapter.number), Toast.LENGTH_SHORT).show();
                     reminderItemsArrayList.add(reminderItems);
                     Calendar myAlarmDate = Calendar.getInstance();
                     myAlarmDate.setTimeInMillis(System.currentTimeMillis());
@@ -56,12 +57,13 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("DATETESTING",Integer.toString(reminderItems.date_year)+ "/" + Integer.toString(reminderItems.date_month)+"/" +Integer.toString(reminderItems.date_day)
                             + "|||||" + Integer.toString(reminderItems.time_hours) + ":" + Integer.toString(reminderItems.time_minutes)
                     );
-                    number++;
                 }
                 adapter.notifyDataSetChanged();
             }
         }
     }
+
+
 
 
     @Override
@@ -97,19 +99,16 @@ public class MainActivity extends AppCompatActivity {
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, number, intent, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, Adapter.number, intent, 0);
         if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
         }
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
-        Log.i("LALAHU",Long.toString(c.getTimeInMillis()));
     }
-
-    public void cancelAlarm()
-    {
+    public void cancelPreviousReminder() {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, number, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, Adapter.number, intent, 0);
         alarmManager.cancel(pendingIntent);
     }
 
