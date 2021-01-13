@@ -103,9 +103,14 @@ public class MainActivity2 extends AppCompatActivity  {
             }
         });
 
+
+
+        /////////////////////////////OK/////////////////////////////
+
         imageButton_OK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 ReminderItems reminderItems = get_return_data();
                 Intent output = new Intent();
                 output.putExtra("TheData", reminderItems);

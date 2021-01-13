@@ -1,5 +1,6 @@
 package com.example.remindme;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -133,6 +134,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         intent.putExtra("IsEdit",true);
         intent.putExtra("time",time);
         intent.putExtra("date",date);
-        context.startActivity(intent);
+        ((Activity)  context).startActivityForResult(intent,1);
     }
 }
