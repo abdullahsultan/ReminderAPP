@@ -25,7 +25,7 @@ public class AlertReceiver extends BroadcastReceiver {
         MediaPlayer mediaPlayer = MediaPlayer.create(context, Settings.System.DEFAULT_NOTIFICATION_URI);
         mediaPlayer.start();
 
-        Vibrator v = (Vibrator) context.getSystemService(context.VIBRATOR_SERVICE);
+        Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(900);
 
 
