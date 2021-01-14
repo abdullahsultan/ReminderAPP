@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     public Adapter adapter;
     public LinearLayoutManager layoutManager;
     public LinearLayout linearLayoutEmpty;
+    public ReminderItems reminderItems;
     public Calendar myAlarmDate;
 
     @Override
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
 
                 // Get String data from Intent
-                ReminderItems reminderItems;
                 reminderItems =  data.getParcelableExtra("TheData");
                 boolean isEdit = data.getBooleanExtra("IsEdit",false);
 
@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
+        intent.putExtra("title",reminderItems.title);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, Adapter.number, intent, 0);
         if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
