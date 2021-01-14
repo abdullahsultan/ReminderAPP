@@ -37,6 +37,7 @@
 
             <Button
                 android:id="@+id/Button_time"
+                android:drawableLeft="@drawable/clock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
@@ -64,6 +65,7 @@
                 android:id="@+id/Button_Date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/date"
                 android:layout_weight="0"
                 android:text="Date"/>
 

@@ -26,10 +26,13 @@ public class MainActivity extends AppCompatActivity {
     public Adapter adapter;
     public LinearLayoutManager layoutManager;
     public LinearLayout linearLayoutEmpty;
+    public Calendar myAlarmDate;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+
 
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
@@ -41,16 +44,20 @@ public class MainActivity extends AppCompatActivity {
 
                 if(isEdit)
                 {
-                    cancelPreviousReminder();
+                        cancelPreviousReminder();
                         int at = data.getIntExtra("at",reminderItemsArrayList.size());
-                        reminderItemsArrayList.set(at,reminderItems);
+                        adapter.addEdit(at,reminderItems);
+                        //reminderItemsArrayList.set(at,reminderItems);
+                        myAlarmDate = Calendar.getInstance();
+                        myAlarmDate.setTimeInMillis(System.currentTimeMillis());
+                        myAlarmDate.set(reminderItems.date_year, reminderItems.date_month, reminderItems.date_day, reminderItems.time_hours, reminderItems.time_minutes, 0);
                 }
                 else
                 {
-
-                    Toast.makeText(this, Integer.toString(Adapter.number), Toast.LENGTH_SHORT).show();
-                    reminderItemsArrayList.add(reminderItems);
-                    Calendar myAlarmDate = Calendar.getInstance();
+                   // reminderItemsArrayList.add(reminderItems);
+                    linearLayoutEmpty.setVisibility(View.GONE);
+                    adapter.add(reminderItems);
+                    myAlarmDate = Calendar.getInstance();
                     myAlarmDate.setTimeInMillis(System.currentTimeMillis());
                     myAlarmDate.set(reminderItems.date_year, reminderItems.date_month, reminderItems.date_day, reminderItems.time_hours, reminderItems.time_minutes, 0);
                     setAlarm(myAlarmDate);
@@ -58,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
                             + "|||||" + Integer.toString(reminderItems.time_hours) + ":" + Integer.toString(reminderItems.time_minutes)
                     );
                 }
-                adapter.notifyDataSetChanged();
+                //adapter.notifyDataSetChanged();
+                setAlarm(myAlarmDate);
             }
         }
     }
@@ -76,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutEmpty = findViewById(R.id.layoutReminder);
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
 
-        adapter = new Adapter(this,reminderItemsArrayList);
+        adapter = new Adapter(this,reminderItemsArrayList, this);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -112,5 +120,14 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.cancel(pendingIntent);
     }
 
+    public  void showOnEmpty()
+    {
+        linearLayoutEmpty.setVisibility(View.VISIBLE);
+    }
+
+    public  void hideOnFill()
+    {
+        linearLayoutEmpty.setVisibility(View.GONE);
+    }
 
 }

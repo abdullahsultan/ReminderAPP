@@ -27,10 +27,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public  String date;
     public String mainTitle;
     ArrayList<ReminderItems> data;
-    public Adapter(Context context, ArrayList<ReminderItems> data)
+    MainActivity activity;
+    public Adapter(Context context, ArrayList<ReminderItems> data, MainActivity activity)
     {
         this.context = context;
         this.data = data;
+        this.activity = activity;
     }
 
 
@@ -46,6 +48,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         number = position;
+
+        Log.i("CHECKINGT","Position = " + Integer.toString(position) + ":: AdapterPosition = "+ Integer.toString(holder.getAdapterPosition()));
         ReminderItems reminderItems = this.data.get(position);
         holder.title.setText(reminderItems.title);
         mainTitle = reminderItems.title;
@@ -70,6 +74,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 data.remove(position);
+                if(data.size() == 0)
+                {
+                    activity.showOnEmpty();
+                }
+
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, data.size());
                 cancelAlarm();
@@ -82,7 +91,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                     edit();
             }
         });
+
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -135,5 +147,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         intent.putExtra("time",time);
         intent.putExtra("date",date);
         ((Activity)  context).startActivityForResult(intent,1);
+    }
+
+    public void add(ReminderItems r)
+    {
+        data.add(r);
+        number = data.size() - 1;
+        notifyDataSetChanged();
+
+    }
+
+    public  void addEdit(int at , ReminderItems reminderItems)
+    {
+        data.set(at,reminderItems);
+        notifyDataSetChanged();
     }
 }
