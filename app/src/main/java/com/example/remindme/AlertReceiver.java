@@ -9,7 +9,6 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Vibrator;
 import android.provider.Settings;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
@@ -38,10 +37,10 @@ public class AlertReceiver extends BroadcastReceiver {
         notificationManager.createNotificationChannel(channel);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "HEHE")
                 .setSmallIcon(R.drawable.notification)
-                .setContentTitle(title)
-                .setContentText("Don't forget your reminder")
+                .setContentTitle("Don't forget")
+                .setContentText("")
                 .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText("Much longer text that cannot fit one line..."))
+                        .bigText(title))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
 

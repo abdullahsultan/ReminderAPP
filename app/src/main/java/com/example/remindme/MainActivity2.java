@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -14,9 +12,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
-
-import java.io.Serializable;
 
 public class MainActivity2 extends AppCompatActivity  {
 
@@ -180,7 +175,7 @@ public class MainActivity2 extends AppCompatActivity  {
         } else {
             AM_PM = "PM";
         }
-        String time = Integer.toString(timePicker.getHour()) + ":" + Integer.toString(timePicker.getMinute()) + "  " + AM_PM;
+        String time = timePicker.getHour() + ":" + timePicker.getMinute() + "  " + AM_PM;
         textView_time.setText(time);
     }
 

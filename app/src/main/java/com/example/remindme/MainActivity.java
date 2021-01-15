@@ -11,10 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -43,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
 
                 // Get String data from Intent
+                assert data != null;
                 reminderItems = data.getParcelableExtra("TheData");
                 boolean isEdit = data.getBooleanExtra("IsEdit", false);
 
@@ -55,18 +54,14 @@ public class MainActivity extends AppCompatActivity {
                     myAlarmDate.setTimeInMillis(System.currentTimeMillis());
                     myAlarmDate.set(reminderItems.date_year, reminderItems.date_month, reminderItems.date_day, reminderItems.time_hours, reminderItems.time_minutes, 0);
                 } else {
-                    // reminderItemsArrayList.add(reminderItems);
                     linearLayoutEmpty.setVisibility(View.GONE);
                     adapter.add(reminderItems);
                     myAlarmDate = Calendar.getInstance();
                     myAlarmDate.setTimeInMillis(System.currentTimeMillis());
                     myAlarmDate.set(reminderItems.date_year, reminderItems.date_month, reminderItems.date_day, reminderItems.time_hours, reminderItems.time_minutes, 0);
                     setAlarm(myAlarmDate);
-                    Log.i("DATETESTING", Integer.toString(reminderItems.date_year) + "/" + Integer.toString(reminderItems.date_month) + "/" + Integer.toString(reminderItems.date_day)
-                            + "|||||" + Integer.toString(reminderItems.time_hours) + ":" + Integer.toString(reminderItems.time_minutes)
-                    );
+
                 }
-                //adapter.notifyDataSetChanged();
                 setAlarm(myAlarmDate);
             }
         }
@@ -77,13 +72,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loadData();
-
 
         ////////////////////////////////////Getting IDS///////////////////////////////////
         recyclerView = findViewById(R.id.recyclerView);
         linearLayoutEmpty = findViewById(R.id.layoutReminder);
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
+
+        loadData();
 
         adapter = new Adapter(this, reminderItemsArrayList, this);
         layoutManager = new LinearLayoutManager(this);
@@ -106,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Toast.makeText(this, "STOP", Toast.LENGTH_SHORT).show();
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
@@ -118,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Toast.makeText(this, "DESTROYED", Toast.LENGTH_SHORT).show();
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
@@ -133,11 +126,15 @@ public class MainActivity extends AppCompatActivity {
         String json = sharedPreferences.getString("task list", null);
         Type type = new TypeToken<ArrayList<ReminderItems>>() {
         }.getType();
-        Toast.makeText(this, "LOADED", Toast.LENGTH_SHORT).show();
         reminderItemsArrayList = gson.fromJson(json, type);
+        linearLayoutEmpty.setVisibility(View.GONE);
         if (reminderItemsArrayList == null) {
             reminderItemsArrayList = new ArrayList<>();
-            Toast.makeText(this, "EMPTY", Toast.LENGTH_SHORT).show();
+        }
+        if(reminderItemsArrayList.isEmpty())
+        {
+            linearLayoutEmpty.setVisibility(View.VISIBLE);
+
         }
 
     }
@@ -165,8 +162,5 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutEmpty.setVisibility(View.VISIBLE);
     }
 
-    public void hideOnFill() {
-        linearLayoutEmpty.setVisibility(View.GONE);
-    }
 
 }

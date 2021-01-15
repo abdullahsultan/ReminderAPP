@@ -5,7 +5,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
@@ -41,33 +39,23 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.reminder_items,parent,false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         number = position;
 
-        Log.i("CHECKINGT","Position = " + Integer.toString(position) + ":: AdapterPosition = "+ Integer.toString(holder.getAdapterPosition()));
         ReminderItems reminderItems = this.data.get(position);
         holder.title.setText(reminderItems.title);
         mainTitle = reminderItems.title;
 
         ///////////////////////////////////////////////////////// Setting Date & Time to UI /////////////////////////////////////////
-        time = Integer.toString(reminderItems.time_hours)+":" + Integer.toString(reminderItems.time_minutes)+":"+ reminderItems.time_AM_PM;
+        time = reminderItems.time_hours +":" + reminderItems.time_minutes +":"+ reminderItems.time_AM_PM;
         holder.time.setText(time);
-        date = Integer.toString(reminderItems.date_day)+"/"+Integer.toString(reminderItems.date_month+1)+"/"+Integer.toString(reminderItems.date_year);
+        date = reminderItems.date_day +"/"+ (reminderItems.date_month + 1) +"/"+ reminderItems.date_year;
         holder.date.setText(date);
 
-
-    /*    Calendar myAlarmDate = Calendar.getInstance();
-        myAlarmDate.setTimeInMillis(System.currentTimeMillis());
-        myAlarmDate.set(reminderItems.date_year, reminderItems.date_month, reminderItems.date_day, reminderItems.time_hours, reminderItems.time_minutes, 0);
-        Log.i("DATETESTING",Integer.toString(reminderItems.date_year)+ "/" + Integer.toString(reminderItems.date_month)+"/" +Integer.toString(reminderItems.date_day)
-        + "|||||" + Integer.toString(reminderItems.time_hours) + ":" + Integer.toString(reminderItems.time_minutes)
-        );
-        setAlarm(myAlarmDate);*/
 
         //////////////////////////////////////////////Delete Reminder/////////////////////////////////////////
         holder.button_delete.setOnClickListener(new View.OnClickListener() {
@@ -118,18 +106,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         }
     }
 
- /*   public void setAlarm(Calendar c)
-    {
-
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, AlertReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, number, intent, PendingIntent.FLAG_ONE_SHOT);
-        if (c.before(Calendar.getInstance())) {
-            c.add(Calendar.DATE, 1);
-        }
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
-        Log.i("LALAHU",Long.toString(c.getTimeInMillis()));
-    }*/
 
     public void cancelAlarm()
     {
