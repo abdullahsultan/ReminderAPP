@@ -1,5 +1,6 @@
 package com.example.remindme;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -15,7 +16,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
@@ -51,7 +54,27 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         mainTitle = reminderItems.title;
 
         ///////////////////////////////////////////////////////// Setting Date & Time to UI /////////////////////////////////////////
-        time = reminderItems.time_hours +":" + reminderItems.time_minutes +":"+ reminderItems.time_AM_PM;
+        String AM_PM;
+        if(reminderItems.time_hours < 12) {
+            AM_PM = "AM";
+        } else {
+            AM_PM = "PM";
+        }
+
+        time = reminderItems.time_hours + ":" +reminderItems.time_minutes;
+
+        try {
+            String _24HourTime = time;
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm");
+            Date _24HourDt = _24HourSDF.parse(_24HourTime);
+            assert _24HourDt != null;
+            time = _12HourSDF.format(_24HourDt);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        time = time + "  " + AM_PM;
         holder.time.setText(time);
         date = reminderItems.date_day +"/"+ (reminderItems.date_month + 1) +"/"+ reminderItems.date_year;
         holder.date.setText(date);

@@ -2,8 +2,10 @@ package com.example.remindme;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -12,6 +14,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity2 extends AppCompatActivity  {
 
@@ -51,8 +56,6 @@ public class MainActivity2 extends AppCompatActivity  {
 
         }
 
-
-        timePicker.setIs24HourView(false);
 
         button_Time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +129,7 @@ public class MainActivity2 extends AppCompatActivity  {
         button_date = findViewById(R.id.Button_Date);
         linearLayout_Time = findViewById(R.id.LinearLayout_Time);
         timePicker = findViewById(R.id.TimePicker);
+        timePicker.setIs24HourView(false);
         button_timePicker = findViewById(R.id.Button_TimeOK);
         linearLayout_Date = findViewById(R.id.LinearLayout_Date);
         datePicker = findViewById(R.id.DatePicker);
@@ -175,7 +179,22 @@ public class MainActivity2 extends AppCompatActivity  {
         } else {
             AM_PM = "PM";
         }
-        String time = timePicker.getHour() + ":" + timePicker.getMinute() + "  " + AM_PM;
+
+        String time = timePicker.getHour() + ":" + timePicker.getMinute();
+
+        try {
+            String _24HourTime = time;
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm");
+            Date _24HourDt = _24HourSDF.parse(_24HourTime);
+            assert _24HourDt != null;
+            time = _12HourSDF.format(_24HourDt);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        time = time + "  " + AM_PM;
+        Log.i("TIMEEEEEE", time);
         textView_time.setText(time);
     }
 

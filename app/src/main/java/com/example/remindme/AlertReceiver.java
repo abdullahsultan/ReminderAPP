@@ -47,10 +47,6 @@ public class AlertReceiver extends BroadcastReceiver {
 // notificationId is a unique int for each notification that you must define
         notificationManager.notify(Adapter.number, builder.build());
 
-
-       /* NotificationHelper notificationHelper = new NotificationHelper(context);
-        NotificationCompat.Builder nb = notificationHelper.getChannelNotification();
-        notificationHelper.getManager().notify(1, nb.build());*/
     }
 
 }

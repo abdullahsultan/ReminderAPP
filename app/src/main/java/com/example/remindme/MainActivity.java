@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
                     myAlarmDate = Calendar.getInstance();
                     myAlarmDate.setTimeInMillis(System.currentTimeMillis());
                     myAlarmDate.set(reminderItems.date_year, reminderItems.date_month, reminderItems.date_day, reminderItems.time_hours, reminderItems.time_minutes, 0);
-                    setAlarm(myAlarmDate);
 
                 }
                 setAlarm(myAlarmDate);
@@ -109,16 +108,6 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(reminderItemsArrayList);
-        editor.putString("task list", json);
-        editor.apply();
-    }
 
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
