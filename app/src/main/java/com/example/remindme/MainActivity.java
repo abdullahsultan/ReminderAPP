@@ -50,17 +50,14 @@ public class MainActivity extends AppCompatActivity {
                     int at = data.getIntExtra("at", reminderItemsArrayList.size());
                     adapter.addEdit(at, reminderItems);
                     //reminderItemsArrayList.set(at,reminderItems);
-                    myAlarmDate = Calendar.getInstance();
-                    myAlarmDate.setTimeInMillis(System.currentTimeMillis());
-                    myAlarmDate.set(reminderItems.date_year, reminderItems.date_month, reminderItems.date_day, reminderItems.time_hours, reminderItems.time_minutes, 0);
                 } else {
                     linearLayoutEmpty.setVisibility(View.GONE);
                     adapter.add(reminderItems);
-                    myAlarmDate = Calendar.getInstance();
-                    myAlarmDate.setTimeInMillis(System.currentTimeMillis());
-                    myAlarmDate.set(reminderItems.date_year, reminderItems.date_month, reminderItems.date_day, reminderItems.time_hours, reminderItems.time_minutes, 0);
 
                 }
+                myAlarmDate = Calendar.getInstance();
+                myAlarmDate.setTimeInMillis(System.currentTimeMillis());
+                myAlarmDate.set(reminderItems.date_year, reminderItems.date_month, reminderItems.date_day, reminderItems.time_hours, reminderItems.time_minutes, 0);
                 setAlarm(myAlarmDate);
             }
         }

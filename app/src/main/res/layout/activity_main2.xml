@@ -38,9 +38,11 @@
             <Button
                 android:id="@+id/Button_time"
                 android:drawableLeft="@drawable/clock"
+                android:tint="#FFFFFF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
+
                 android:text="Time"/>
 
         </LinearLayout>
@@ -130,6 +132,9 @@
         android:id="@+id/ImageButton_Cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:tint="#FFFFFF"
+        android:background="#E51717"
         android:src="@drawable/cancel"
         android:layout_margin="50px"
         android:layout_gravity="left|bottom"/>
@@ -138,6 +143,9 @@
         android:id="@+id/ImageButton_OK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="#0D8709"
+        android:tint="#FFFFFF"
         android:src="@drawable/ok"
         android:layout_margin="50px"
         android:layout_gravity="right|bottom"/>

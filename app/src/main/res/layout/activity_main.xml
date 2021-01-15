@@ -46,6 +46,7 @@
         android:layout_gravity="bottom|right"
         android:layout_margin="50px"
         app:fabSize="normal"
+        android:tint="#FFFFFF"
         android:clickable="true"
         android:focusable="true" />
 

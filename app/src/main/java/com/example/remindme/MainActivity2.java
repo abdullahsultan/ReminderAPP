@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -60,7 +59,7 @@ public class MainActivity2 extends AppCompatActivity  {
         button_Time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hide_Backgroud();
+                hide_Background();
                 show_time();
             }
         });
@@ -69,7 +68,7 @@ public class MainActivity2 extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 hide_time();
-                show_Backgroud();
+                show_Background();
                 set_time();
             }
         });
@@ -77,7 +76,7 @@ public class MainActivity2 extends AppCompatActivity  {
         button_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hide_Backgroud();
+                hide_Background();
                 show_date();
             }
         });
@@ -87,7 +86,7 @@ public class MainActivity2 extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 hide_date();
-                show_Backgroud();
+                show_Background();
                 set_date();
             }
         });
@@ -137,14 +136,14 @@ public class MainActivity2 extends AppCompatActivity  {
         imageButton_Cancel = findViewById(R.id.ImageButton_Cancel);
         imageButton_OK = findViewById(R.id.ImageButton_OK);
     }
-    public void hide_Backgroud()
+    public void hide_Background()
     {
         mainLinearLayout.setVisibility(View.GONE);
         imageButton_OK.setVisibility(View.GONE);
         imageButton_Cancel.setVisibility(View.GONE);
     }
 
-    public void show_Backgroud()
+    public void show_Background()
     {
         mainLinearLayout.setVisibility(View.VISIBLE);
         imageButton_OK.setVisibility(View.VISIBLE);
@@ -194,7 +193,6 @@ public class MainActivity2 extends AppCompatActivity  {
         }
 
         time = time + "  " + AM_PM;
-        Log.i("TIMEEEEEE", time);
         textView_time.setText(time);
     }
 

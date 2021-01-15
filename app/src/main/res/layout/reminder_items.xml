@@ -21,7 +21,10 @@
             android:id="@+id/button_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:tint="#FFFFFF"
             android:src="@drawable/delete"
+            android:background="#E51717"
             android:layout_gravity="center_vertical|end"
             />
 
@@ -55,15 +58,21 @@
             android:id="@+id/ImageButton_Edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="2dp"
             android:layout_marginRight="20px"
+            android:background="#355C4D"
+            android:tint="#FFFFFF"
             android:src="@drawable/edit"
             android:layout_gravity="center_vertical|end"
             />
 
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="2px"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"/>
 
 
 
