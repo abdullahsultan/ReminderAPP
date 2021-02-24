@@ -7,26 +7,26 @@ In student life it is difficult to keep track of tons of assignment deadline and
 ####	Similar Apps:
 There are several apps task reminder apps available for this purpose but they are not that much simple and provide a couple of other features that we do not need.
 ### **Requirements Gathering and Analysis:**
-There are several apps available that provide many advance features for reminding functionality like repeating, sharing, snooze, simple and detail text. All these features are good but not for a preson who is not geeky. There comes remind me a very simple app for one time reminders. It uses image buttons which makes UI attractive and simple to use even for an illiterate person. <br/>
-<img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/UseCase.png" width="450" height="500"> <br/>
+There are several apps available that provide many advance features for reminding functionality like repeating, sharing, snooze, simple and detail text. All these features are good but not for a preson who is not geeky. There comes remind me a very simple app for one time reminders. It uses image buttons which makes UI attractive and simple to use even for an illiterate person. <br/><br/>
+<img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/UseCase.png" width="450" height="500"> <br/> <br/>
 **Usage** <br/>
-Tap Add button in bottom right. <br/>
-<img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/Add.jpg" width="250" height="500"> <br/>
-Set Reminder Name,Time,Date and Tap Green Tick in right bottom to set reminder or tap red cross in bottom left to cancel. <br/>
+Tap Add button in bottom right. <br/> <br/>
+<img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/Add.jpg" width="250" height="500"> <br/> <br/>
+Set Reminder Name,Time,Date and Tap Green Tick in right bottom to set reminder or tap red cross in bottom left to cancel. <br/> <br/>
 <img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/Cancel.jpg" width="250" height="500"> 
-<img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/Set.jpg" width="250" height="500"> <br/>
-To delete reminder tap red cross in top right of reminder box. <br/>
-<img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/Delete.jpg" width="250" height="500"> <br/>
-To edit reminder tap on grey pencil bottom right of reminder box, it immeditaely take you to edit page <br/>
-<img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/Edit.jpg" width="250" height="500"> <br/>
+<img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/Set.jpg" width="250" height="500"> <br/> <br/>
+To delete reminder tap red cross in top right of reminder box. <br/> <br/>
+<img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/Delete.jpg" width="250" height="500"> <br/> <br/>
+To edit reminder tap on grey pencil bottom right of reminder box, it immeditaely take you to edit page <br/> <br/>
+<img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/Edit.jpg" width="250" height="500"> <br/> <br/>
 ### **Features:**
--> Very Simple App
--> Easy to use
--> User Friendly
--> Attractive Interface
+-> Very Simple App <br/>
+-> Easy to use <br/>
+-> User Friendly <br/>
+-> Attractive Interface <br/>
 
 ### Implementation of features
--> App was made simple by making it for only one time reminder.
--> Made wasy to use by not adding too many activies and other stuff just focused on goal.
-->  Made User Friendly by using images as much as possible.
--> Made attractive interface using good dark color scheme.
+-> App was made simple by making it for only one time reminder. <br/>
+-> Made wasy to use by not adding too many activies and other stuff just focused on goal. <br/>
+->  Made User Friendly by using images as much as possible. <br/>
+-> Made attractive interface using good dark color scheme. <br/>
