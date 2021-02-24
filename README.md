@@ -8,17 +8,17 @@ In student life it is difficult to keep track of tons of assignment deadline and
 There are several apps task reminder apps available for this purpose but they are not that much simple and provide a couple of other features that we do not need.
 ### **Requirements Gathering and Analysis:**
 There are several apps available that provide many advance features for reminding functionality like repeating, sharing, snooze, simple and detail text. All these features are good but not for a preson who is not geeky. There comes remind me a very simple app for one time reminders. It uses image buttons which makes UI attractive and simple to use even for an illiterate person.
-![alt text](https://github.com/abdullahsultan/ReminderAPP/blob/master/UseCase.png?raw=true)
+<img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/UseCase.png" width="700" height="700">
 **Usage**
 Tap Add button in bottom right.
-![alt text](https://github.com/abdullahsultan/ReminderAPP/blob/master/Add.jpg?raw=true)
+<img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/Add.jpg" width="600" height="600">
 Set Reminder Name,Time,Date and Tap Green Tick in right bottom to set reminder or tap red cross in bottom left to cancel.
-![alt text](https://github.com/abdullahsultan/ReminderAPP/blob/master/Cancel.jpg?raw=true)
-![alt text](https://github.com/abdullahsultan/ReminderAPP/blob/master/Set.jpg?raw=true)
+<img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/Cancel.jpg" width="600" height="600">
+<img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/Set.jpg" width="600" height="600">
 To delete reminder tap red cross in top right of reminder box.
-![alt text](https://github.com/abdullahsultan/ReminderAPP/blob/master/Delete.jpg?raw=true)
+<img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/Delete.jpg" width="600" height="600">
 To edit reminder tap on grey pencil bottom right of reminder box, it immeditaely take you to edit page
-![alt text](https://github.com/abdullahsultan/ReminderAPP/blob/master/Edit.jpg?raw=true)
+<img src="https://github.com/abdullahsultan/ReminderAPP/blob/master/Edit.jpg" width="600" height="600">
 ### **Features:**
 -> Very Simple App
 -> Easy to use
