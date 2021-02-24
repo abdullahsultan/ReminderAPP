@@ -17,5 +17,10 @@ Set Reminder Name,Time,Date and Tap Green Tick in right bottom to set reminder o
 ![alt text](https://github.com/abdullahsultan/ReminderAPP/blob/master/Set.jpg?raw=true)
 To delete reminder tap red cross in top right of reminder box.
 ![alt text](https://github.com/abdullahsultan/ReminderAPP/blob/master/Delete.jpg?raw=true)
-To edit reminder tap on grey pencil bottom right of reminder box.
+To edit reminder tap on grey pencil bottom right of reminder box, it immeditaely take you to edit page
 ![alt text](https://github.com/abdullahsultan/ReminderAPP/blob/master/Edit.jpg?raw=true)
+### **Features:**
+-> Very Simple App
+-> Easy to use
+-> User Friendly
+-> Attractive Interface
