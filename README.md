@@ -8,3 +8,4 @@ In student life it is difficult to keep track of tons of assignment deadline and
 There are several apps task reminder apps available for this purpose but they are not that much simple and provide a couple of other features that we do not need.
 ### **Requirements Gathering and Analysis:**
 There are several apps available that provide many advance features for reminding functionality like repeating, sharing, snooze, simple and detail text. All these features are good but not for a preson who is not geeky. There comes remind me a very simple app for one time reminders. It uses image buttons which makes UI attractive and simple to use even for an illiterate person.
+![alt text](https://github.com/abdullahsultan/ReminderAPP/blob/master/UseCase.png?raw=true)
