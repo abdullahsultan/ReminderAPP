@@ -24,3 +24,9 @@ To edit reminder tap on grey pencil bottom right of reminder box, it immeditaely
 -> Easy to use
 -> User Friendly
 -> Attractive Interface
+
+### Implementation of features
+-> App was made simple by making it for only one time reminder.
+-> Made wasy to use by not adding too many activies and other stuff just focused on goal.
+->  Made User Friendly by using images as much as possible.
+-> Made attractive interface using good dark color scheme.
